@@ -12,7 +12,7 @@
 
 // Implement a Promise
 
-class PromiseSimple {
+class PromisePolyfill {
   // constructor that takes executionFunction (callback function)
   // contains two public methods - then() and catch()
   // and two internal methods - onResolve() and onReject
@@ -59,108 +59,44 @@ class PromiseSimple {
   }
 }
 
-fakeApiBackend = () => {
-  const user = {
-    username: "treyhuffine",
-    favoriteNumber: 42,
-    profile: "https://gitconnected.com/treyhuffine",
-  };
+const myPromise = () =>
+  new PromisePolyfill((resolve) => setTimeout(resolve, 5000));
 
-  // Introduce a randomizer to simulate the possibility of encountering an error
-  if (Math.random() > 0.05) {
-    return {
-      data: user,
-      statusCode: 200,
-    };
-  } else {
-    const error = {
-      statusCode: 404,
-      message: "Could not find user",
-      error: "Not Found",
-    };
-
-    return error;
-  }
-};
-
-// Assume this is your AJAX library.
-// Almost all newer ones return a Promise object.
-const makeApiCall = () => {
-  return new PromiseSimple((resolve, reject) => {
-    // Use a timeout to simulate the network delay waiting for the response.
-    // This is THE reason you use a promise.
-    // It waits for the API to respond, and after received, it executes code in the `then()` blocks in order.
-    // If it executed this immediately, there would be no data.
-    setTimeout(() => {
-      const apiResponse = fakeApiBackend();
-
-      if (apiResponse.statusCode >= 400) {
-        reject(apiResponse);
-      } else {
-        resolve(apiResponse.data);
-      }
-    }, 5000);
-  });
-};
-
-makeApiCall()
-  .then((user) => {
-    console.log("In the first .then()");
-
-    return user;
-  })
-  .then((user) => {
-    console.log(
-      `User ${user.username}'s favorite number is ${user.favoriteNumber}`
-    );
-
-    return user;
-  })
-  .then((user) => {
-    console.log("The previous .then() told you the favoriteNumber");
-
-    return user.profile;
-  })
-  .then((profile) => {
-    console.log(`The profile URL is ${profile}`);
-  })
-  .then(() => {
-    console.log("This is the last then()");
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });
+myPromise().then(
+  () => console.log("Hello!"),
+  (err) => console.log(err)
+);
 
 // Async - await syntax is just a wrapper around promises.
 // if you mark a function as async it just convert the response to promise
 
-const apiRequest = async () => {
-  // do some async things for an unknown amount of time...
-  return { answer: 42 };
-};
+// const apiRequest = async () => {
+//   // do some async things for an unknown amount of time...
+//   return { answer: 42 };
+// };
 
-const run = async () => {
-  const response = await apiRequest();
-  console.log(response);
-};
+// const run = async () => {
+//   const response = await apiRequest();
+//   console.log(response);
+// };
 
-// it is equivalent to -
+// // it is equivalent to -
 
-const apiRequest = () => {
-  return new Promise((resove) => {
-    // do some async things for an unknown amount of time...
-    return resolve({ answer: 42 });
-  });
-};
+// const apiRequest = () => {
+//   return new Promise((resove) => {
+//     // do some async things for an unknown amount of time...
+//     return resolve({ answer: 42 });
+//   });
+// };
 
-const run = () => {
-  apiRequest.then((response) => {
-    console.log(response);
-  });
-};
+// const run = () => {
+//   apiRequest.then((response) => {
+//     console.log(response);
+//   });
+// };
 
-// Since it's all just promises, you can mix and match with async/await
-const runAsAsyncAwait = async () => {
-  const response = await apiRequest();
-  console.log(response);
-};
+// // Since it's all just promises, you can mix and match with async/await
+// const runAsAsyncAwait = async () => {
+//   const response = await apiRequest();
+//   console.log(response);
+// };
