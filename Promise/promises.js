@@ -59,11 +59,19 @@ class PromisePolyfill {
   }
 }
 
-const myPromise = () =>
-  new PromisePolyfill((resolve) => setTimeout(resolve, 5000));
+const myPromise = (a) =>
+  new PromisePolyfill((resolve, reject) =>
+    setTimeout(() => {
+      if (a) {
+        resolve(a);
+      } else {
+        reject(a);
+      }
+    }, 5000)
+  );
 
-myPromise().then(
-  () => console.log("Hello!"),
+myPromise(5).then(
+  (res) => console.log(res),
   (err) => console.log(err)
 );
 
