@@ -45,3 +45,24 @@ promise(5).then(
 //   const response = await apiRequest();
 //   console.log(response);
 // };
+
+// Interview Ques
+
+// given sample promise function
+
+const arr = [1, 2, 3, 4];
+function myPromise(num) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(`priniting sequence: ${num}`);
+      console.log(`printing num ${num}`);
+    }, 1000);
+  });
+}
+
+// - Reduce
+arr.reduce((acc, currentVal) => {
+  return new Promise((resolve) => {
+    resolve(acc.then(() => myPromise(currentVal)));
+  });
+}, Promise.resolve());
