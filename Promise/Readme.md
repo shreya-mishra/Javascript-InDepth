@@ -12,9 +12,7 @@
 
 - through callback it was difficult because that cause callback hell (pyramid doom)
 
-### Callback Hell
-
-- Its pyramid doom or a pattern seen in async code that has so many nested if else statements or functions.
+- [Callback Hell] - Its pyramid doom or a pattern seen in async code that has so many nested if else statements or functions.
 
 - but Promises can chain async operaton using .then() by passing the result to next one.
 
