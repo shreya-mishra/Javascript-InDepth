@@ -1,13 +1,23 @@
-# JS is single threaded which means it executes program line by line.
+# Promise
 
-# It is also asynchronous which means that if our program execution reaches a block of code that must wait on a result, it will continue on past this block of code that is waiting so the program doesnt freeze execution.
+## Synchronous and Asynchronous
 
-# And once the async task finishes our code will handle the result it was waiting for by using promise or a callback
+- JS is single threaded which means it executes program line by line.
 
-# Difference between Callback and promise.
+- It is also asynchronous which means that if our program execution reaches a block of code that must wait on a result, it will continue on past this block of code that is waiting so the program doesnt freeze execution.
 
-# => through callback it was difficult because that cause callback hell (pyramid doom) but Promises can chain async operaton using .then() by passing the result to next one.
+- And once the async task finishes our code will handle the result it was waiting for by using promise or a callback
 
-# Promise => Its just a plain Js object that represent completion or failure of async operations.
+## Difference between Callback and promise.
 
-# Async - await syntax is just a wrapper around promises.If you mark a function as async it just convert the response to promise.
+- through callback it was difficult because that cause callback hell (pyramid doom)
+
+### Callback Hell
+
+- Its pyramid doom or a pattern seen in async code that has so many nested if else statements or functions.
+
+- but Promises can chain async operaton using .then() by passing the result to next one.
+
+- Its just a plain Js object that represent completion or failure of async operations.
+
+- Async - await syntax is just a wrapper around promises.If you mark a function as async it just convert the response to promise.
