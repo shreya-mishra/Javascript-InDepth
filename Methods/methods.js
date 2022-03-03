@@ -1,3 +1,7 @@
+// bind returns a function that is associated with a new value
+// call method calls a function that associates a value in which we can pass argument individually
+// apply method calls a function that associates a value in which we can pass argument as a an array
+
 const obj = {
   name: "test",
   age: 20,
