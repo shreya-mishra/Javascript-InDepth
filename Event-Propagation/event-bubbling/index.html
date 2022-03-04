@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Event Bubbling</title>
+
+    <style>
+      div {
+        min-width: 100px;
+        min-height: 100px;
+        padding: 30px;
+        border: 1px solid black;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="grandparent">
+      <div id="parent">
+        <div id="child"></div>
+      </div>
+    </div>
+
+    <script>
+      // in event listener if u dont pass any 3rd argument by default then it considers to be a False by default
+
+      // when u pass 'false it is in bubbling mode'
+
+      // if u pass 'true' is will be capture mode.
+      // it will be trickling out
+
+      // As this operation is really expensive so we do another thing like we use stoppropagation
+      // if we want the click to only be associated with the child and does not trigger out all the eventhandler then we using stopPropagation()
+      document.querySelector("#grandparent").addEventListener(
+        "click",
+        () => {
+          console.log("Grandparent Clicked!");
+        },
+        true
+      ); // capturing
+      document.querySelector("#parent").addEventListener(
+        "click",
+        (e) => {
+          console.log("Parent Clicked!");
+          e.stopPropagation();
+        },
+        false
+      ); // bubbling
+      document.querySelector("#child").addEventListener(
+        "click",
+        () => {
+          console.log("Child Clicked!");
+        },
+        true
+      ); // capturing
+    </script>
+  </body>
+</html>
+
+<!-- // Output will be 
+grandparent Clicked
+child clicked
+parent clicked  -->
