@@ -1,0 +1,65 @@
+<!-- 
+    
+Flipkart question => Make a searchbar like flipkart search bar website
+
+in which when we type anything then it should auto suggest , and makes an api call and fetch the results and feeds to the dropdown list.
+
+And if you type more then again more api calls are made and the results are fetch from the network
+
+The important thing to notice over here that
+if we are search school bags
+
+=> 2 api calls were there
+
+-> made api call of school
+-> other one is school bags 
+
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debounce</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      placeholder="enter your product"
+      onkeyup="afterDebounce()"
+    />
+    <script>
+      var counter = 0;
+      const getData = () => {
+        console.log("Fetching data from the network", counter++);
+      };
+
+      const doSomeMagic = function (fn, delay) {
+        let timer;
+        return function () {
+          let context = this;
+          args = arguments;
+          // we need to do something now to fix when keystroke happens between those time then we should clear this timeout
+          clearTimeout(timer);
+          timer = setTimeout(() => {
+            getData.apply(context, args);
+          }, delay);
+        };
+      };
+
+      const afterDebounce = doSomeMagic(getData, 1000);
+    </script>
+  </body>
+</html>
+
+<!--
+
+   Now I want once I pause while typing then only this API call should be made 
+   To solve this problem we should come up with some function which can do some
+magic on our getData()
+
+so for this dont make a call again and again rather than it should only call when the user is paused while typing
+mean -only call getData method when the difference between two key press event is greater than or equal to 3ms
+
+-->
