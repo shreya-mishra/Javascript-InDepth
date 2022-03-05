@@ -26,3 +26,26 @@
 
 - suppose we are typing samsun then it will make a api call after n if at n that delay is done after that whatever we type it will ignore and make an api call and get the result.
 - that means if difference between two function call is that delay then only api call will made.
+
+### Example
+
+- Resizing the window
+
+- Throttling is setting a interval and after certain interval a api call will be made.
+
+### Button Press
+
+- Suppose a user is clicking that button frequently
+- then what will happen in debounce and throttle
+
+#### Debounce
+
+- The function call will only be made if the difference between two click events is greater than that delay then the function call will be made.
+
+#### Throttling
+
+- Machine gun game
+
+## Which is good , Debounce or throttle?
+
+- It depends on the scenarios
